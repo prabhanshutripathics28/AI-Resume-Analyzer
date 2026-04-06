@@ -34,7 +34,7 @@ def missing_skills(resume, job_desc):
     return list(job_words - resume_words)
 
 
-# 🔥 NEW FEATURE
+#  NEW FEATURE
 def top_matching_words(resume, job_desc):
     resume_words = set(resume.split())
     job_words = set(job_desc.split())
