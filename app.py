@@ -23,11 +23,17 @@ if resume_file and job_desc:
     #  Results
     st.subheader(f"Match Score: {score}%")
 
-    st.subheader("Top Matching Skills")
+     # Progress bar
+    st.progress(int(score))
+
+    st.markdown("Analysis Results")
+
+    st.markdown("Top Matching Skills")
     st.write(top_words)
 
-    st.subheader("Missing Skills")
-    st.write(missing[:10])
+    st.markdown("Missing Skills")
+    st.write(missing[:10]) 
+    
 
     #  Feedback
     if score < 50:
