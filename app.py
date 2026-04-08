@@ -8,10 +8,12 @@ st.write("Updated UI 🚀")
 resume_file = st.file_uploader("Upload Resume (PDF)")
 job_desc = st.text_area("Paste Job Description")
 
-if resume_file and job_desc:
+if not resume_file or not job_desc:
+    st.warning("Please upload resume and paste job description")
+
+else:
     resume_text = extract_text(resume_file)
 
-    #  Show extracted content
     st.subheader("Extracted Resume Content")
     st.write(resume_text[:500])
 
@@ -22,35 +24,24 @@ if resume_file and job_desc:
     missing = missing_skills(r, j)
     top_words = top_matching_words(r, j)
 
-
     st.markdown("## 📊 Analysis Results")
 
-    # Score Section
     st.markdown(f"### 🎯 Match Score: {score}%")
     st.progress(int(score))
 
+    # ✅ EVERYTHING BELOW MUST BE INSIDE ELSE
 
-    #  Feedback
-    if score < 50:
-        ...
-        st.error(" Low match. Improve your resume.")
-    elif score < 75:
-        st.warning(" Decent match, but can improve.")
-    else:
-        st.success(" Strong match! You're good to go.")
-
-    # Skills Section
     col1, col2 = st.columns(2)
 
     with col1:
-    st.markdown("### ✅ Matching Skills")
-    for skill in top_words:
-        st.markdown(f"- {skill}")
+        st.markdown("### ✅ Matching Skills")
+        for skill in top_words:
+            st.write(f"- {skill}")
 
     with col2:
-    st.markdown("### ❌ Missing Skills")
-    for skill in missing[:10]:
-        st.markdown(f"- {skill}")
+        st.markdown("### ❌ Missing Skills")
+        for skill in missing[:10]:
+            st.write(f"- {skill}")
 
     report = f"""
 Match Score: {score}%
@@ -62,9 +53,9 @@ Missing Skills:
 {', '.join(missing[:10])}
 """
 
-st.download_button(
-    label="📥 Download Report",
-    data=report,
-    file_name="resume_analysis.txt",
-    mime="text/plain"
-)
+    st.download_button(
+        label="📥 Download Report",
+        data=report,
+        file_name="resume_analysis.txt",
+        mime="text/plain"
+    )
