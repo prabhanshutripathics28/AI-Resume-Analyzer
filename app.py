@@ -3,6 +3,8 @@ from utils import extract_text, preprocess, match_score, missing_skills, top_mat
 
 st.title(" AI Resume Analyzer (NLP-based Matching System)")
 
+st.write("Updated UI ")
+
 resume_file = st.file_uploader("Upload Resume (PDF)")
 job_desc = st.text_area("Paste Job Description")
 
